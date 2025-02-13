@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Furnace Temperature Predictor</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap');
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 450px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 1.5rem;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        label {
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: #555;
+            display: block;
+        }
+
+        input[type="number"] {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        input[type="number"]:focus {
+            outline: none; 
+            border-color: #4a90e2; 
+            box-shadow: 0 0 5px rgba(74, 144, 226, 0.5);
+        }
+
+        button {
+            background-color: #4a90e2;
+            color: white;
+            border: none;
+            padding: 0.75rem;
+            font-size: 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #3a7bc8;
+        }
+
+        .refresh-btn {
+            background-color: #ddd; 
+            color: black; 
+            margin-top: 10px; 
+        }
+        
+        .refresh-btn:hover {
+            background-color: #bbb; 
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Furnace Temperature Predictor</h1>
+        <form action="{{ url_for('predict') }}" method="post">
+            
+            <!-- Width Input -->
+            <div class="form-group">
+                <label for="width">Width:</label>
+                <input type="number" id="width" name="width" value="{{ inputs.width }}" required step="1">
+            </div>
+            
+            <!-- Thickness Input -->
+            <div class="form-group">
+                <label for="thickness">Thickness:</label>
+                <input type="number" id="thickness" name="thickness" value="{{ inputs.thickness }}" required step="0.01">
+            </div>
+            
+            <!-- GSM-A Input -->
+            <div class="form-group">
+                <label for="gsm_a">GSM-A:</label>
+                <input type="number" id="gsm_a" name="gsm_a" value="{{ inputs.gsm_a }}" required step="1">
+            </div>
+            
+            <!-- TPH Input -->
+            <div class="form-group">
+                <label for="tph">TPH:</label>
+                <input type="number" id="tph" name="tph" value="{{ inputs.tph }}" required step="1">
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit">Predict Temperature</button>
+
+             <!-- Reset Button -->
+             <button type="reset" class="refresh-btn">Reset</button>
+
+        </form>
+    </div>
+</body>
+</html>
